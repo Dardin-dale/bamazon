@@ -11,3 +11,8 @@ CREATE TABLE products (
     stock_quantity INT(10),
     PRIMARY KEY (id)
 );
+
+-- selects all the products
+SELECT * FROM products
+
+SELECT * FROM products WHERE 
