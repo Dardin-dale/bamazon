@@ -9,10 +9,17 @@ CREATE TABLE products (
     department_name VARCHAR(30),
     price DEC(6,2),
     stock_quantity INT(10),
+    product_sales DEC(15,2) DEFAULT 0,
     PRIMARY KEY (id)
 );
 
--- selects all the products
-SELECT * FROM products
+CREATE TABLE departments (
+    department_id INT NOT NULL AUTO_INCREMENT,
+    department_name VARCHAR(30),
+    over_head_costs DEC(15,2),
+    PRIMARY KEY (department_id)
+);
 
-SELECT * FROM products WHERE 
+-- selects all the products
+--SELECT * FROM products
+

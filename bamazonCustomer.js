@@ -82,13 +82,13 @@ function checkStock (id, quant) {
     function(err, res) {
       var stock = res[0].stock_quantity;
       var price = res[0].price;
-      var name = res[0].product_name;
+      var sales = res[0].product_sales;
       if (err) throw err;
       if (stock < quant) {
         console.log('Sorry we only have ' + stock + ' available.');
         start();
       } else {
-        buyProduct(id, quant, stock, price);
+        buyProduct(id, quant, stock, price, sales);
       }
     }
   )
@@ -96,11 +96,12 @@ function checkStock (id, quant) {
 
 /*removes the product from the inventory
 inventory has already been evaluated for removal*/
-function buyProduct(id, quant, stock, price) {
+function buyProduct(id, quant, stock, price, sales) {
   connection.query(
     'UPDATE products SET ? WHERE id=?', [
       {
-        stock_quantity: (stock-quant)
+        stock_quantity: (stock-quant),
+        product_sales: quant*price + sales
       },
       id],
     function(err) {
